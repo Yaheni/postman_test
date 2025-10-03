@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "c3e565a9-ac40-4c1b-8b4e-a4db13b2a779",
+		"name": "zags_senla_for_nastya",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5288563"
+	},
+	"item": [
+		{
+			"name": "Создание заявки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseJson = pm.response.json();\r",
+							"let applicationid = responseJson.data.applicationid;\r",
+							"pm.environment.set(\"applicationid_variable\", applicationid);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "senlatest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"birth\",\r\n    \"applicant\": 2,\r\n    \"status\": \"Application 2 with type \\\"birth\\\" is registered in ZAGS system\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/sendUserRequest",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"sendUserRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение информации о статусе заявки",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/getApplStatus/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"getApplStatus",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Регистрация админа",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseJson = pm.response.json();\r",
+							"let staffid = responseJson.data.staffid;\r",
+							"pm.environment.set(\"staffid_variable\", staffid);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "senlatest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dateofbirth\": \"2000-01-02\",\r\n  \"personalFirstName\": \"Админов\",\r\n  \"personalLastName\": \"Админ\",\r\n  \"personalMiddleName\": \"Админович\",\r\n  \"personalNumberOfPassport\": \"1111111\",\r\n  \"personalPhoneNumber\": \"0000000000000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/sendAdminRequest",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"sendAdminRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение статуса заявки - Одобрена",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "senlatest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"applId\": 1,\r\n  \"staffid\": 1,\r\n  \"action\": \"approved\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/requestProcess",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"requestProcess"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение статуса заявки - Отклонена",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "senlatest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"applId\": 1,\r\n  \"staffid\": 1,\r\n  \"action\": \"rejected\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/requestProcess",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"requestProcess"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDocument",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"console.log(pm.response.headers.contentSize())\r",
+							"pm.test(\"Check content-type is PDF\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/pdf\");\r",
+							"});\r",
+							"pm.test(\"Check filename\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.eql(`attachment; filename=\"${pm.variables.get(\"idBirth\")}.pdf\"`);\r",
+							"});\r",
+							"console.log(`attachment; filename=\"${pm.variables.get(\"idWedding\")}.pdf\"`);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjpzZW5sYXRlc3Q="
+					}
+				],
+				"url": {
+					"raw": "{{doc_url}}/getDocument/1",
+					"host": [
+						"{{doc_url}}"
+					],
+					"path": [
+						"getDocument",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generateDoc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"appid\": id\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8001/generateDoc",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"generateDoc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Все заявки",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/getApplications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"getApplications"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
