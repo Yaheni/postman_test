@@ -1,0 +1,31 @@
+{
+  "id": "your-environment-id",
+  "name": "Registration Office Docker",
+  "values": [
+    {
+      "key": "backend_url",
+      "value": "http://backend:8000",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "doc_url", 
+      "value": "http://backend:8001",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "mq_url",
+      "value": "http://backend:8003", 
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "postgrest_url",
+      "value": "http://postgrest:3000",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}
